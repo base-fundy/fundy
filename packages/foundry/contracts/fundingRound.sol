@@ -3,7 +3,12 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
+/**
+ * @title FundingRound
+ * @dev Manages funding rounds with quadratic funding for projects.
+ */
 contract FundingRound {
+    // Structs
     struct Project {
         uint256 id;
         uint256 votingPoints;
@@ -11,73 +16,118 @@ contract FundingRound {
         address recipient;
     }
 
-    Project[] public projects;
-    IERC20 private immutable mUSDC;
-    uint256 private nextProjectId = 0;
+    // State variables
+    Project[] private _projects;
+    IERC20 private immutable _mUSDC;
+    uint256 private _nextProjectId = 0;
 
-    constructor(address _mUSDCAddress) {
-        mUSDC = IERC20(_mUSDCAddress);
+    // Events
+    event ProjectCreated(
+        uint256 indexed projectId,
+        string name,
+        address recipient
+    );
+    event FundsContributed(
+        address indexed contributor,
+        uint256[] projectIds,
+        uint256 totalAmount
+    );
+    event FundsDistributed();
+
+    /**
+     * @dev Sets the Mock USDC contract address.
+     * @param mUSDCAddress address of the Mock USDC contract
+     */
+    constructor(address mUSDCAddress) {
+        _mUSDC = IERC20(mUSDCAddress);
     }
 
-    function createProject(string calldata _name, address _recipient) external {
-        projects.push(Project(nextProjectId++, 0, _name, _recipient));
+    /**
+     * @dev Allows the owner to create a new project.
+     * @param name Name of the project
+     * @param recipient Recipient address for the project funds
+     */
+    function createProject(string calldata name, address recipient) external {
+        _projects.push(Project(_nextProjectId++, 0, name, recipient));
+        emit ProjectCreated(_nextProjectId - 1, name, recipient);
     }
 
-    // Getter for project details by ID
-    function getProject(
-        uint256 projectId
-    ) external view returns (Project memory) {
-        require(projectId < projects.length, "Project does not exist");
-        return projects[projectId];
-    }
-
-    function addFunds(uint256 _amount) internal {
-        require(_amount > 0, "Amount must be greater than 0");
-        mUSDC.transferFrom(msg.sender, address(this), _amount);
-    }
-
-    // This function can remain internal as it's used internally
-    function addPoints(uint256 _projectId, uint256 _points) internal {
-        require(_projectId < projects.length, "Project does not exist");
-        projects[_projectId].votingPoints += _points;
-    }
-
-    // Contribute to a project and vote
+    /**
+     * @dev Allows contributors to fund and vote for selected projects using quadratic voting.
+     * @param projectIds Array of project IDs to contribute and vote for
+     * @param totalAmount Total amount to distribute among the selected projects
+     */
     function contributeAndVote(
-        uint256[] calldata _projectIds,
+        uint256[] calldata projectIds,
         uint256 totalAmount
     ) external {
-        uint256 fractionalPoints = sqrt(totalAmount) / _projectIds.length;
+        _addFunds(totalAmount);
+        uint256 fractionalPoints = _sqrt(totalAmount) / projectIds.length;
 
-        addFunds(totalAmount);
-
-        for (uint256 i = 0; i < _projectIds.length; i++) {
-            addPoints(_projectIds[i], fractionalPoints);
+        for (uint256 i = 0; i < projectIds.length; i++) {
+            _addPoints(projectIds[i], fractionalPoints);
         }
+
+        emit FundsContributed(msg.sender, projectIds, totalAmount);
     }
 
+    /**
+     * @dev Distributes the collected funds to projects based on voting points.
+     */
     function distributeFunds() external {
-        uint256 totalPoints = 0;
-        for (uint i = 0; i < projects.length; i++) {
-            totalPoints += projects[i].votingPoints;
-        }
-
+        uint256 totalPoints = _calculateTotalPoints();
         require(totalPoints > 0, "No projects to distribute to");
 
-        for (uint i = 0; i < projects.length; i++) {
-            if (projects[i].votingPoints > 0) {
-                uint256 projectShare = (mUSDC.balanceOf(address(this)) *
-                    projects[i].votingPoints) / totalPoints;
-                mUSDC.transfer(projects[i].recipient, projectShare);
+        for (uint256 i = 0; i < _projects.length; i++) {
+            if (_projects[i].votingPoints > 0) {
+                uint256 projectShare = (_mUSDC.balanceOf(address(this)) *
+                    _projects[i].votingPoints) / totalPoints;
+                _mUSDC.transfer(_projects[i].recipient, projectShare);
             }
+        }
+
+        emit FundsDistributed();
+    }
+
+    /**
+     * @dev Internal function to add funds to the contract.
+     * @param amount Amount of funds to add
+     */
+    function _addFunds(uint256 amount) private {
+        require(amount > 0, "Amount must be greater than 0");
+        _mUSDC.transferFrom(msg.sender, address(this), amount);
+    }
+
+    /**
+     * @dev Internal function to add voting points to a project.
+     * @param projectId ID of the project
+     * @param points Number of voting points to add
+     */
+    function _addPoints(uint256 projectId, uint256 points) private {
+        require(projectId < _projects.length, "Project does not exist");
+        _projects[projectId].votingPoints += points;
+    }
+
+    /**
+     * @dev Internal function to calculate the total voting points.
+     * @return totalPoints Total voting points
+     */
+    function _calculateTotalPoints()
+        private
+        view
+        returns (uint256 totalPoints)
+    {
+        for (uint256 i = 0; i < _projects.length; i++) {
+            totalPoints += _projects[i].votingPoints;
         }
     }
 
-    function getUSDCBalance() external view returns (uint256) {
-        return mUSDC.balanceOf(address(this));
-    }
-
-    function sqrt(uint256 x) internal pure returns (uint256 y) {
+    /**
+     * @dev Internal pure function to calculate the square root of a number.
+     * @param x Number to calculate the square root of
+     * @return y Square root of x
+     */
+    function _sqrt(uint256 x) internal pure returns (uint256 y) {
         uint256 z = (x + 1) / 2;
         y = x;
         while (z < y) {
