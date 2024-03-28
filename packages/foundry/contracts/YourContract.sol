@@ -81,4 +81,35 @@ contract YourContract {
      * Function that allows the contract to receive ETH
      */
     receive() external payable {}
+
+
+    struct Project {
+        uint id;
+        string name;
+        address payable owner;
+        uint balance;
+    }
+
+    Project[] public projects;
+    uint public nextProjectId;
+
+    function registerProject(string memory name) public {
+        projects.push(Project(nextProjectId, name, payable(msg.sender), 0));
+        nextProjectId++;
+    }
+
+    function getProjects() public view returns (Project[] memory) {
+        return projects;
+    }
+
+    function fundProjectById(uint projectId) public payable {
+        for(uint i = 0; i < projects.length; i++) {
+            if(projects[i].id == projectId) {
+                projects[i].balance += msg.value;
+                projects[i].owner.transfer(msg.value); // Send the funds to project owner
+                return;
+            }
+        }
+        revert("Project not found");
+    }
 }
