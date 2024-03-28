@@ -1,1 +1,4 @@
-@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts
+@openzeppelin/contracts/=../../node_modules/@openzeppelin/contracts/
+@sablier/v2-core/=../../node_modules/@sablier/v2-core/
+@sablier/v2-periphery/=../../node_modules/@sablier/v2-periphery/
+@prb/math/=../../node_modules/@prb/math/
