@@ -83,7 +83,7 @@ contract FundingRoundTest is Test {
         );
     }
 
-    function testDistributeFunds() public {
+    function testDtistribueFunds() public {
         // Setup: Create two projects
         string memory projectName1 = "Project One";
         address projectRecipient1 = address(0x123);

@@ -76,11 +76,12 @@ contract FundingRound {
      */
     function distributeFunds() external {
         uint256 totalPoints = _calculateTotalPoints();
+        uint256 totalBalance = _mUSDC.balanceOf(address(this));
         require(totalPoints > 0, "No projects to distribute to");
 
         for (uint256 i = 0; i < _projects.length; i++) {
             if (_projects[i].votingPoints > 0) {
-                uint256 projectShare = (_mUSDC.balanceOf(address(this)) *
+                uint256 projectShare = (totalBalance *
                     _projects[i].votingPoints) / totalPoints;
                 _mUSDC.transfer(_projects[i].recipient, projectShare);
             }
