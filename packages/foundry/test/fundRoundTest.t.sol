@@ -84,18 +84,56 @@ contract FundingRoundTest is Test {
     }
 
     function testDistributeFunds() public {
-        // Assume projects are created and funded as in the previous tests
+        // Setup: Create two projects
+        string memory projectName1 = "Project One";
+        address projectRecipient1 = address(0x123);
+        fundingRound.createProject(projectName1, projectRecipient1);
 
-        // Approve mUSDC spending and contribute to projects
-        // ...
+        string memory projectName2 = "Project Two";
+        address projectRecipient2 = address(0x456);
+        fundingRound.createProject(projectName2, projectRecipient2);
+
+        // Approve mUSDC spending and contribute to both projects
+        uint256[] memory projectIds = new uint256[](2);
+        projectIds[0] = 0; // ID of the first project
+        projectIds[1] = 1; // ID of the second project
+        uint256 totalAmount = 1000 ether; // Total amount to distribute among the projects
+
+        mockUSDC.approve(address(fundingRound), totalAmount);
+        fundingRound.contributeAndVote(projectIds, totalAmount);
+
+        // Store initial balances of the project recipients
+        uint256 initialBalanceRecipient1 = mockUSDC.balanceOf(
+            projectRecipient1
+        );
+        uint256 initialBalanceRecipient2 = mockUSDC.balanceOf(
+            projectRecipient2
+        );
 
         // Call distributeFunds
         vm.expectEmit(false, false, false, true);
         emit FundsDistributed();
-
         fundingRound.distributeFunds();
 
-        // Further checks: Verify that funds were distributed correctly to each project's recipient
+        // Calculate expected share based on voting points
+        // For simplicity, assuming equal votes hence equal share
+        uint256 expectedSharePerProject = totalAmount / projectIds.length;
+
+        // Verify the funds were distributed correctly
+        uint256 finalBalanceRecipient1 = mockUSDC.balanceOf(projectRecipient1);
+        uint256 finalBalanceRecipient2 = mockUSDC.balanceOf(projectRecipient2);
+
+        // Check if the recipients received the correct amount
+        assertEq(
+            finalBalanceRecipient1,
+            initialBalanceRecipient1 + expectedSharePerProject,
+            "Project 1 recipient did not receive correct funds"
+        );
+        assertEq(
+            finalBalanceRecipient2,
+            initialBalanceRecipient2 + expectedSharePerProject,
+            "Project 2 recipient did not receive correct funds"
+        );
     }
 
     function testInsufficientAllowance() public {
