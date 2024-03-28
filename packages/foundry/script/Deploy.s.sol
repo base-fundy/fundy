@@ -2,6 +2,9 @@
 pragma solidity ^0.8.19;
 
 import "../contracts/YourContract.sol";
+/*import "../contracts/fundFactory.sol";
+import "../contracts/fundingRound.sol";
+import "../contracts/mockUSDC.sol";*/
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -17,6 +20,10 @@ contract DeployScript is ScaffoldETHDeploy {
         vm.startBroadcast(deployerPrivateKey);
         YourContract yourContract =
             new YourContract(vm.addr(deployerPrivateKey));
+        /*FundingRound fundingRound =
+            new FundingRound(vm.addr(deployerPrivateKey));
+        MockUSDC mockUSDC =
+            new MockUSDC(vm.addr(deployerPrivateKey));*/
         console.logString(
             string.concat(
                 "YourContract deployed at: ", vm.toString(address(yourContract))

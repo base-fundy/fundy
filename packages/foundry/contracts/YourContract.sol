@@ -102,14 +102,16 @@ contract YourContract {
         return projects;
     }
 
-    function fundProjectById(uint projectId) public payable {
-        for(uint i = 0; i < projects.length; i++) {
-            if(projects[i].id == projectId) {
-                projects[i].balance += msg.value;
-                projects[i].owner.transfer(msg.value); // Send the funds to project owner
-                return;
+    function fundProjectsByIds(uint[] memory projectIds) public payable {
+        uint amountPerProject = msg.value / projectIds.length;
+        for(uint i = 0; i < projectIds.length; i++) {
+            for(uint j = 0; j < projects.length; j++) {
+                if(projects[j].id == projectIds[i]) {
+                    projects[j].balance += amountPerProject;
+                    projects[j].owner.transfer(amountPerProject); // Send the funds to project owner
+                    break;
+                }
             }
         }
-        revert("Project not found");
     }
 }
