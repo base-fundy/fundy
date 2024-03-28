@@ -65,7 +65,22 @@ contract FundingRoundTest is Test {
 
         fundingRound.contributeAndVote(projectIds, totalAmount);
 
-        // Further checks: Verify that the projects received the correct amount of voting points
+        // Verify project voting points are correctly updated
+        (, uint256 votingPoints1, , ) = fundingRound.getProjectDetails(0);
+        (, uint256 votingPoints2, , ) = fundingRound.getProjectDetails(1);
+        uint256 totalPointsExpected = _sqrt(100 ether);
+        uint256 individualPointExpected = totalPointsExpected / 2; // Since funds are equally divided
+
+        assertEq(
+            votingPoints1,
+            individualPointExpected,
+            "Project 1 did not receive correct voting points"
+        );
+        assertEq(
+            votingPoints2,
+            individualPointExpected,
+            "Project 2 did not receive correct voting points"
+        );
     }
 
     function testDistributeFunds() public {
@@ -107,5 +122,14 @@ contract FundingRoundTest is Test {
 
         vm.expectRevert("Project does not exist");
         fundingRound.contributeAndVote(projectIds, totalAmount);
+    }
+
+    function _sqrt(uint256 x) internal pure returns (uint256 y) {
+        uint256 z = (x + 1) / 2;
+        y = x;
+        while (z < y) {
+            y = z;
+            z = (x / z + z) / 2;
+        }
     }
 }

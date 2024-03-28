@@ -123,6 +123,25 @@ contract FundingRound {
     }
 
     /**
+     * @dev Gets the details of a project by its ID.
+     * @param projectId The ID of the project to retrieve.
+     * @return The project details including id, votingPoints, name, and recipient address.
+     */
+    function getProjectDetails(
+        uint256 projectId
+    ) external view returns (uint256, uint256, string memory, address) {
+        require(projectId < _projects.length, "Project does not exist");
+
+        Project storage project = _projects[projectId];
+        return (
+            project.id,
+            project.votingPoints,
+            project.name,
+            project.recipient
+        );
+    }
+
+    /**
      * @dev Internal pure function to calculate the square root of a number.
      * @param x Number to calculate the square root of
      * @return y Square root of x
