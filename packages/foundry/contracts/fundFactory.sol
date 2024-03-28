@@ -9,7 +9,7 @@ contract FundFactory is Ownable {
     // Assuming the mUSDC address is constant and known at compile time
     address private immutable mUSDCAddress;
 
-    constructor(address _mUSDCAddress) Ownable(msg.sender) {
+    constructor(address _mUSDCAddress) {
         mUSDCAddress = _mUSDCAddress;
     }
 
