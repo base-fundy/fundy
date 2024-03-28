@@ -11,7 +11,7 @@ contract FundingRound {
         address recipient;
     }
 
-    Project[] private projects;
+    Project[] public projects;
     IERC20 private immutable mUSDC;
     uint256 private nextProjectId = 0;
 
@@ -31,7 +31,7 @@ contract FundingRound {
         return projects[projectId];
     }
 
-    function addFunds(uint256 _amount) private {
+    function addFunds(uint256 _amount) internal {
         require(_amount > 0, "Amount must be greater than 0");
         mUSDC.transferFrom(msg.sender, address(this), _amount);
     }
@@ -43,15 +43,34 @@ contract FundingRound {
     }
 
     // Contribute to a project and vote
-    function contributeAndVote(uint256 _projectId, uint256 _amount) external {
-        addFunds(_amount);
-        uint256 points = sqrt(_amount);
-        addPoints(_projectId, points);
+    function contributeAndVote(
+        uint256[] calldata _projectIds,
+        uint256 totalAmount
+    ) external {
+        uint256 fractionalPoints = sqrt(totalAmount) / _projectIds.length;
+
+        addFunds(totalAmount);
+
+        for (uint256 i = 0; i < _projectIds.length; i++) {
+            addPoints(_projectIds[i], fractionalPoints);
+        }
     }
 
-    // Distribute funds based on voting points
     function distributeFunds() external {
-        // Logic remains the same as your implementation
+        uint256 totalPoints = 0;
+        for (uint i = 0; i < projects.length; i++) {
+            totalPoints += projects[i].votingPoints;
+        }
+
+        require(totalPoints > 0, "No projects to distribute to");
+
+        for (uint i = 0; i < projects.length; i++) {
+            if (projects[i].votingPoints > 0) {
+                uint256 projectShare = (mUSDC.balanceOf(address(this)) *
+                    projects[i].votingPoints) / totalPoints;
+                mUSDC.transfer(projects[i].recipient, projectShare);
+            }
+        }
     }
 
     function getUSDCBalance() external view returns (uint256) {
