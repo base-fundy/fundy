@@ -6,7 +6,6 @@ import "./FundingRound.sol";
 
 contract FundFactory is Ownable {
     address[] private _fundingRounds;
-    uint256 test;
     // Assuming the mUSDC address is constant and known at compile time
     address private immutable _i_mUSDCAddress;
 

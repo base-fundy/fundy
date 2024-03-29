@@ -1,0 +1,356 @@
+{
+  "abi": [
+    { "type": "error", "name": "SablierV2Batch_BatchSizeZero", "inputs": [] },
+    {
+      "type": "error",
+      "name": "SablierV2MerkleStreamer_CampaignExpired",
+      "inputs": [
+        { "name": "currentTime", "type": "uint256", "internalType": "uint256" },
+        { "name": "expiration", "type": "uint40", "internalType": "uint40" }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "SablierV2MerkleStreamer_CampaignNotExpired",
+      "inputs": [
+        { "name": "currentTime", "type": "uint256", "internalType": "uint256" },
+        { "name": "expiration", "type": "uint40", "internalType": "uint40" }
+      ]
+    },
+    { "type": "error", "name": "SablierV2MerkleStreamer_InvalidProof", "inputs": [] },
+    { "type": "error", "name": "SablierV2MerkleStreamer_ProtocolFeeNotZero", "inputs": [] },
+    {
+      "type": "error",
+      "name": "SablierV2MerkleStreamer_StreamClaimed",
+      "inputs": [{ "name": "index", "type": "uint256", "internalType": "uint256" }]
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080806040523460175760119081601d823930815050f35b600080fdfe600080fdfea164736f6c6343000817000a",
+    "sourceMap": "169:1238:163:-:0;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x600080fdfea164736f6c6343000817000a",
+    "sourceMap": "169:1238:163:-:0;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"SablierV2Batch_BatchSizeZero\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint40\",\"name\":\"expiration\",\"type\":\"uint40\"}],\"name\":\"SablierV2MerkleStreamer_CampaignExpired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"currentTime\",\"type\":\"uint256\"},{\"internalType\":\"uint40\",\"name\":\"expiration\",\"type\":\"uint40\"}],\"name\":\"SablierV2MerkleStreamer_CampaignNotExpired\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"SablierV2MerkleStreamer_InvalidProof\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"SablierV2MerkleStreamer_ProtocolFeeNotZero\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"SablierV2MerkleStreamer_StreamClaimed\",\"type\":\"error\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Errors\",\"version\":1},\"userdoc\":{\"errors\":{\"SablierV2MerkleStreamer_CampaignExpired(uint256,uint40)\":[{\"notice\":\"Thrown when trying to claim after the campaign has expired.\"}],\"SablierV2MerkleStreamer_CampaignNotExpired(uint256,uint40)\":[{\"notice\":\"Thrown when trying to clawback when the campaign has not expired.\"}],\"SablierV2MerkleStreamer_InvalidProof()\":[{\"notice\":\"Thrown when trying to claim with an invalid Merkle proof.\"}],\"SablierV2MerkleStreamer_ProtocolFeeNotZero()\":[{\"notice\":\"Thrown when trying to claim when the protocol fee is not zero.\"}],\"SablierV2MerkleStreamer_StreamClaimed(uint256)\":[{\"notice\":\"Thrown when trying to claim the same stream more than once.\"}]},\"kind\":\"user\",\"methods\":{},\"notice\":\"Library containing all custom errors the protocol may revert with.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/libraries/Errors.sol\":\"Errors\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\"},\"optimizer\":{\"enabled\":true,\"runs\":10000},\"remappings\":[\":@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/\",\":@prb/math/=node_modules/@prb/math/\",\":@prb/test/=node_modules/@prb/test/\",\":@sablier/v2-core/=node_modules/@sablier/v2-core/\",\":forge-std/=node_modules/forge-std/\",\":solady/=node_modules/solady/\"],\"viaIR\":true},\"sources\":{\"src/libraries/Errors.sol\":{\"keccak256\":\"0x2708778e69afcbbaa6963139b2df10dd06ebec06278d8dedee915d01d8c25cc4\",\"license\":\"GPL-3.0-or-later\",\"urls\":[\"bzz-raw://20f365f7608963351bfbcc93c150f9b04221a3fa93430d80dcbcd264c5eede8b\",\"dweb:/ipfs/QmcHnjsxeTEbEKkgyNXEzybbjb6KZXFEA5Yw3y52txZ372\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": { "version": "0.8.23+commit.f704f362" },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        { "inputs": [], "type": "error", "name": "SablierV2Batch_BatchSizeZero" },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "currentTime", "type": "uint256" },
+            { "internalType": "uint40", "name": "expiration", "type": "uint40" }
+          ],
+          "type": "error",
+          "name": "SablierV2MerkleStreamer_CampaignExpired"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "currentTime", "type": "uint256" },
+            { "internalType": "uint40", "name": "expiration", "type": "uint40" }
+          ],
+          "type": "error",
+          "name": "SablierV2MerkleStreamer_CampaignNotExpired"
+        },
+        { "inputs": [], "type": "error", "name": "SablierV2MerkleStreamer_InvalidProof" },
+        { "inputs": [], "type": "error", "name": "SablierV2MerkleStreamer_ProtocolFeeNotZero" },
+        {
+          "inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+          "type": "error",
+          "name": "SablierV2MerkleStreamer_StreamClaimed"
+        }
+      ],
+      "devdoc": { "kind": "dev", "methods": {}, "version": 1 },
+      "userdoc": { "kind": "user", "methods": {}, "version": 1 }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/contracts/=node_modules/@openzeppelin/contracts/",
+        "@prb/math/=node_modules/@prb/math/",
+        "@prb/test/=node_modules/@prb/test/",
+        "@sablier/v2-core/=node_modules/@sablier/v2-core/",
+        "forge-std/=node_modules/forge-std/",
+        "solady/=node_modules/solady/"
+      ],
+      "optimizer": { "enabled": true, "runs": 10000 },
+      "metadata": { "bytecodeHash": "none" },
+      "compilationTarget": { "src/libraries/Errors.sol": "Errors" },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "src/libraries/Errors.sol": {
+        "keccak256": "0x2708778e69afcbbaa6963139b2df10dd06ebec06278d8dedee915d01d8c25cc4",
+        "urls": [
+          "bzz-raw://20f365f7608963351bfbcc93c150f9b04221a3fa93430d80dcbcd264c5eede8b",
+          "dweb:/ipfs/QmcHnjsxeTEbEKkgyNXEzybbjb6KZXFEA5Yw3y52txZ372"
+        ],
+        "license": "GPL-3.0-or-later"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/libraries/Errors.sol",
+    "id": 46916,
+    "exportedSymbols": { "Errors": [46915] },
+    "nodeType": "SourceUnit",
+    "src": "45:1363:163",
+    "nodes": [
+      {
+        "id": 46886,
+        "nodeType": "PragmaDirective",
+        "src": "45:25:163",
+        "nodes": [],
+        "literals": ["solidity", ">=", "0.8", ".19"]
+      },
+      {
+        "id": 46915,
+        "nodeType": "ContractDefinition",
+        "src": "169:1238:163",
+        "nodes": [
+          {
+            "id": 46889,
+            "nodeType": "ErrorDefinition",
+            "src": "402:37:163",
+            "nodes": [],
+            "errorSelector": "763e559d",
+            "name": "SablierV2Batch_BatchSizeZero",
+            "nameLocation": "408:28:163",
+            "parameters": { "id": 46888, "nodeType": "ParameterList", "parameters": [], "src": "436:2:163" }
+          },
+          {
+            "id": 46896,
+            "nodeType": "ErrorDefinition",
+            "src": "740:86:163",
+            "nodes": [],
+            "documentation": {
+              "id": 46890,
+              "nodeType": "StructuredDocumentation",
+              "src": "664:71:163",
+              "text": "@notice Thrown when trying to claim after the campaign has expired."
+            },
+            "errorSelector": "74b43bd0",
+            "name": "SablierV2MerkleStreamer_CampaignExpired",
+            "nameLocation": "746:39:163",
+            "parameters": {
+              "id": 46895,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 46892,
+                  "mutability": "mutable",
+                  "name": "currentTime",
+                  "nameLocation": "794:11:163",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46896,
+                  "src": "786:19:163",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": { "typeIdentifier": "t_uint256", "typeString": "uint256" },
+                  "typeName": {
+                    "id": 46891,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "786:7:163",
+                    "typeDescriptions": { "typeIdentifier": "t_uint256", "typeString": "uint256" }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 46894,
+                  "mutability": "mutable",
+                  "name": "expiration",
+                  "nameLocation": "814:10:163",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46896,
+                  "src": "807:17:163",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": { "typeIdentifier": "t_uint40", "typeString": "uint40" },
+                  "typeName": {
+                    "id": 46893,
+                    "name": "uint40",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "807:6:163",
+                    "typeDescriptions": { "typeIdentifier": "t_uint40", "typeString": "uint40" }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "785:40:163"
+            }
+          },
+          {
+            "id": 46903,
+            "nodeType": "ErrorDefinition",
+            "src": "914:89:163",
+            "nodes": [],
+            "documentation": {
+              "id": 46897,
+              "nodeType": "StructuredDocumentation",
+              "src": "832:77:163",
+              "text": "@notice Thrown when trying to clawback when the campaign has not expired."
+            },
+            "errorSelector": "1351f21d",
+            "name": "SablierV2MerkleStreamer_CampaignNotExpired",
+            "nameLocation": "920:42:163",
+            "parameters": {
+              "id": 46902,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 46899,
+                  "mutability": "mutable",
+                  "name": "currentTime",
+                  "nameLocation": "971:11:163",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46903,
+                  "src": "963:19:163",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": { "typeIdentifier": "t_uint256", "typeString": "uint256" },
+                  "typeName": {
+                    "id": 46898,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "963:7:163",
+                    "typeDescriptions": { "typeIdentifier": "t_uint256", "typeString": "uint256" }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 46901,
+                  "mutability": "mutable",
+                  "name": "expiration",
+                  "nameLocation": "991:10:163",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46903,
+                  "src": "984:17:163",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": { "typeIdentifier": "t_uint40", "typeString": "uint40" },
+                  "typeName": {
+                    "id": 46900,
+                    "name": "uint40",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "984:6:163",
+                    "typeDescriptions": { "typeIdentifier": "t_uint40", "typeString": "uint40" }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "962:40:163"
+            }
+          },
+          {
+            "id": 46906,
+            "nodeType": "ErrorDefinition",
+            "src": "1083:45:163",
+            "nodes": [],
+            "documentation": {
+              "id": 46904,
+              "nodeType": "StructuredDocumentation",
+              "src": "1009:69:163",
+              "text": "@notice Thrown when trying to claim with an invalid Merkle proof."
+            },
+            "errorSelector": "b3f3b2a6",
+            "name": "SablierV2MerkleStreamer_InvalidProof",
+            "nameLocation": "1089:36:163",
+            "parameters": { "id": 46905, "nodeType": "ParameterList", "parameters": [], "src": "1125:2:163" }
+          },
+          {
+            "id": 46909,
+            "nodeType": "ErrorDefinition",
+            "src": "1213:51:163",
+            "nodes": [],
+            "documentation": {
+              "id": 46907,
+              "nodeType": "StructuredDocumentation",
+              "src": "1134:74:163",
+              "text": "@notice Thrown when trying to claim when the protocol fee is not zero."
+            },
+            "errorSelector": "a4432b51",
+            "name": "SablierV2MerkleStreamer_ProtocolFeeNotZero",
+            "nameLocation": "1219:42:163",
+            "parameters": { "id": 46908, "nodeType": "ParameterList", "parameters": [], "src": "1261:2:163" }
+          },
+          {
+            "id": 46914,
+            "nodeType": "ErrorDefinition",
+            "src": "1346:59:163",
+            "nodes": [],
+            "documentation": {
+              "id": 46910,
+              "nodeType": "StructuredDocumentation",
+              "src": "1270:71:163",
+              "text": "@notice Thrown when trying to claim the same stream more than once."
+            },
+            "errorSelector": "3548783b",
+            "name": "SablierV2MerkleStreamer_StreamClaimed",
+            "nameLocation": "1352:37:163",
+            "parameters": {
+              "id": 46913,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 46912,
+                  "mutability": "mutable",
+                  "name": "index",
+                  "nameLocation": "1398:5:163",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 46914,
+                  "src": "1390:13:163",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": { "typeIdentifier": "t_uint256", "typeString": "uint256" },
+                  "typeName": {
+                    "id": 46911,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1390:7:163",
+                    "typeDescriptions": { "typeIdentifier": "t_uint256", "typeString": "uint256" }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1389:15:163"
+            }
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Errors",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 46887,
+          "nodeType": "StructuredDocumentation",
+          "src": "72:97:163",
+          "text": "@title Errors\n @notice Library containing all custom errors the protocol may revert with."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [46915],
+        "name": "Errors",
+        "nameLocation": "177:6:163",
+        "scope": 46916,
+        "usedErrors": [46889, 46896, 46903, 46906, 46909, 46914],
+        "usedEvents": []
+      }
+    ],
+    "license": "GPL-3.0-or-later"
+  },
+  "id": 163
+}

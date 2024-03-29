@@ -2,6 +2,10 @@
 pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {ud2x18} from "@prb/math/src/UD2x18.sol";
+import {ud60x18} from "@prb/math/src/UD60x18.sol";
+import {ISablierV2LockupDynamic} from "@sablier/v2-core/src/interfaces/ISablierV2LockupDynamic.sol";
+import {Broker, LockupDynamic} from "@sablier/v2-core/src/types/DataTypes.sol";
 
 /**
  * @title FundingRound
@@ -20,6 +24,10 @@ contract FundingRound {
     Project[] private _projects;
     IERC20 private immutable _mUSDC;
     uint256 private _nextProjectId = 0;
+
+    // Sablier variables
+    ISablierV2LockupDynamic public constant LOCKUP_DYNAMIC =
+        ISablierV2LockupDynamic(0xF46d5fA9bFC964E8d06846c8739AEc69BC06344d);
 
     // Events
     event ProjectCreated(
@@ -83,11 +91,56 @@ contract FundingRound {
             if (_projects[i].votingPoints > 0) {
                 uint256 projectShare = (totalBalance *
                     _projects[i].votingPoints) / totalPoints;
-                _mUSDC.transfer(_projects[i].recipient, projectShare);
+                //_mUSDC.transfer(_projects[i].recipient, projectShare);
+                createStream(
+                    uint128(projectShare * 1) / 4,
+                    uint128(projectShare * 3) / 4,
+                    _projects[i].recipient
+                );
             }
         }
 
         emit FundsDistributed();
+    }
+    event Debug(uint256 number);
+
+    function createStream(
+        uint128 amount0,
+        uint128 amount1,
+        address projectAddress
+    ) public returns (uint256 streamId) {
+        uint256 totalAmount = amount0 + amount1;
+
+        emit Debug(1);
+        _mUSDC.approve(address(LOCKUP_DYNAMIC), totalAmount);
+        emit Debug(2);
+        LockupDynamic.CreateWithMilestones memory params;
+        emit Debug(3);
+        params.sender = address(this);
+        params.recipient = projectAddress;
+        params.totalAmount = uint128(totalAmount);
+        params.asset = _mUSDC;
+        params.cancelable = true;
+        params.startTime = uint40(block.timestamp + 30 seconds);
+        emit Debug(4);
+
+        params.segments = new LockupDynamic.Segment[](2);
+        emit Debug(5);
+
+        params.segments[0] = LockupDynamic.Segment({
+            amount: uint128(amount0),
+            exponent: ud2x18(1e18),
+            milestone: uint40(block.timestamp + 100)
+        });
+        emit Debug(6);
+
+        params.segments[1] = LockupDynamic.Segment({
+            amount: amount1,
+            exponent: ud2x18(1e18),
+            milestone: uint40(block.timestamp + 200)
+        });
+
+        streamId = LOCKUP_DYNAMIC.createWithMilestones(params);
     }
 
     /**

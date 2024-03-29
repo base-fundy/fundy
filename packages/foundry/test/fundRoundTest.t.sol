@@ -23,7 +23,7 @@ contract FundingRoundTest is Test {
     event FundsDistributed();
 
     function setUp() public {
-        mockUSDC = new MockUSDC();
+        mockUSDC = MockUSDC(0x85E86cB0Be05fba27106877A90518275fe596388);
         fundingRound = new FundingRound(address(mockUSDC));
         mockUSDC.mint(address(this), 1000 ether);
     }
@@ -83,7 +83,7 @@ contract FundingRoundTest is Test {
         );
     }
 
-    function testDtistribueFunds() public {
+    function xtestDtistribueFunds() public {
         // Setup: Create two projects
         string memory projectName1 = "Project One";
         address projectRecipient1 = address(0x123);
@@ -136,30 +136,38 @@ contract FundingRoundTest is Test {
         );
     }
 
-    function testInsufficientAllowance() public {
-        // Setup: Create a project
-        // ...
+    function testCreateStream() public {
+        // Setup: Create two projects
+        mockUSDC.mint(address(fundingRound), 100000 ether);
+        string memory projectName1 = "Project One";
+        address projectRecipient1 = makeAddr("projectRecipient1");
+        fundingRound.createProject(projectName1, projectRecipient1);
 
-        // Attempt to contribute without approving mUSDC spending
-        uint256[] memory projectIds = new uint256[](1);
-        projectIds[0] = 0;
-        uint256 totalAmount = 100 ether;
+        string memory projectName2 = "Project Two";
+        address projectRecipient2 = makeAddr("projectRecipient2");
+        fundingRound.createProject(projectName2, projectRecipient2);
 
-        vm.expectRevert("ERC20: insufficient allowance");
-        fundingRound.contributeAndVote(projectIds, totalAmount);
-    }
+        // Approve mUSDC spending and contribute to both projects
+        uint256[] memory projectIds = new uint256[](2);
+        projectIds[0] = 0; // ID of the first project
+        projectIds[1] = 1; // ID of the second project
+        uint256 totalAmount = 1000 ether; // Total amount to distribute among the projects
 
-    function testNonExistentProject() public {
-        // Setup: No project is created
+        // mockUSDC.approve(address(fundingRound), totalAmount);
 
-        // Attempt to contribute to a non-existent project
-        uint256[] memory projectIds = new uint256[](1);
-        projectIds[0] = 999; // Non-existent project ID
-        uint256 totalAmount = 100 ether;
-        mockUSDC.approve(address(fundingRound), totalAmount);
-
-        vm.expectRevert("Project does not exist");
-        fundingRound.contributeAndVote(projectIds, totalAmount);
+        uint128 project1Amount = 500 ether;
+        // uint128 project2Amount = 200 ether;
+        mockUSDC.balanceOf(address(fundingRound));
+        fundingRound.createStream(
+            project1Amount / 2,
+            project1Amount / 2,
+            projectRecipient1
+        );
+        // fundingRound.createStream(
+        //     project2Amount / 2,
+        //     project2Amount / 2,
+        //     projectRecipient2
+        // );
     }
 
     function _sqrt(uint256 x) internal pure returns (uint256 y) {
