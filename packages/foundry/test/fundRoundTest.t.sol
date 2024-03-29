@@ -66,8 +66,8 @@ contract FundingRoundTest is Test {
         fundingRound.contributeAndVote(projectIds, totalAmount);
 
         // Verify project voting points are correctly updated
-        (, uint256 votingPoints1, , ) = fundingRound.getProjectDetails(0);
-        (, uint256 votingPoints2, , ) = fundingRound.getProjectDetails(1);
+        (, uint256 votingPoints1, , ) = fundingRound.projects(0);
+        (, uint256 votingPoints2, , ) = fundingRound.projects(1);
         uint256 totalPointsExpected = _sqrt(100 ether);
         uint256 individualPointExpected = totalPointsExpected / 2; // Since funds are equally divided
 

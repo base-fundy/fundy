@@ -21,7 +21,7 @@ contract FundingRound {
     }
 
     // State variables
-    Project[] private _projects;
+    Project[] public projects;
     IERC20 private immutable _mUSDC;
     uint256 private _nextProjectId = 0;
 
@@ -50,13 +50,17 @@ contract FundingRound {
         _mUSDC = IERC20(mUSDCAddress);
     }
 
+    function getProjects() public view returns (Project[] memory) {
+        return projects;
+    }
+
     /**
      * @dev Allows the owner to create a new project.
      * @param name Name of the project
      * @param recipient Recipient address for the project funds
      */
     function createProject(string calldata name, address recipient) external {
-        _projects.push(Project(_nextProjectId++, 0, name, recipient));
+        projects.push(Project(_nextProjectId++, 0, name, recipient));
         emit ProjectCreated(_nextProjectId - 1, name, recipient);
     }
 
@@ -87,16 +91,20 @@ contract FundingRound {
         uint256 totalBalance = _mUSDC.balanceOf(address(this));
         require(totalPoints > 0, "No projects to distribute to");
 
-        for (uint256 i = 0; i < _projects.length; i++) {
-            if (_projects[i].votingPoints > 0) {
+        for (uint256 i = 0; i < projects.length; i++) {
+            if (projects[i].votingPoints > 0) {
                 uint256 projectShare = (totalBalance *
-                    _projects[i].votingPoints) / totalPoints;
-                //_mUSDC.transfer(_projects[i].recipient, projectShare);
+                // --- no sablier
+                    projects[i].votingPoints) / totalPoints;
+                _mUSDC.transfer(projects[i].recipient, projectShare);
+
+               // --- with sablier
+                  /*_projects[i].votingPoints) / totalPoints;
                 createStream(
                     uint128(projectShare * 1) / 4,
                     uint128(projectShare * 3) / 4,
                     _projects[i].recipient
-                );
+                );*/
             }
         }
 
@@ -158,8 +166,8 @@ contract FundingRound {
      * @param points Number of voting points to add
      */
     function _addPoints(uint256 projectId, uint256 points) private {
-        require(projectId < _projects.length, "Project does not exist");
-        _projects[projectId].votingPoints += points;
+        require(projectId < projects.length, "Project does not exist");
+        projects[projectId].votingPoints += points;
     }
 
     /**
@@ -171,29 +179,11 @@ contract FundingRound {
         view
         returns (uint256 totalPoints)
     {
-        for (uint256 i = 0; i < _projects.length; i++) {
-            totalPoints += _projects[i].votingPoints;
+        for (uint256 i = 0; i < projects.length; i++) {
+            totalPoints += projects[i].votingPoints;
         }
     }
 
-    /**
-     * @dev Gets the details of a project by its ID.
-     * @param projectId The ID of the project to retrieve.
-     * @return The project details including id, votingPoints, name, and recipient address.
-     */
-    function getProjectDetails(
-        uint256 projectId
-    ) external view returns (uint256, uint256, string memory, address) {
-        require(projectId < _projects.length, "Project does not exist");
-
-        Project storage project = _projects[projectId];
-        return (
-            project.id,
-            project.votingPoints,
-            project.name,
-            project.recipient
-        );
-    }
 
     /**
      * @dev Returns the total amount of USDC stored in the contract.
