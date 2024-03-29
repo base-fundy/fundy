@@ -35,6 +35,13 @@ export const Footer = () => {
       <div>
         <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
           <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
+            <button
+              className="btn btn-info btn-sm font-normal"
+              onClick={() => writeAsyncUSDC()}
+              disabled={isLoadingUSDC}
+            >
+              {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>Get MockUSDC $</>}
+            </button>
             {nativeCurrencyPrice > 0 && (
               <div>
                 <div className="btn btn-info btn-sm font-normal gap-1 cursor-auto">
@@ -45,14 +52,6 @@ export const Footer = () => {
             )}
             {isLocalNetwork && (
               <>
-                <button
-                  className="btn btn-info btn-sm font-normal"
-                  onClick={() => writeAsyncUSDC()}
-                  disabled={isLoadingUSDC}
-                >
-                  {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>Get MockUSDC $</>}
-                </button>
-
                 <Faucet />
                 <Link href="/blockexplorer" passHref className="btn btn-info btn-sm font-normal gap-1">
                   <MagnifyingGlassIcon className="h-4 w-4" />

@@ -60,7 +60,7 @@ const FundyRound: NextPage = () => {
             projects?.map(project => (
               <div key={project.id} className="card lg:card-side bg-base-100 shadow-xl mb-6">
                 <figure className="w-1/2">
-                  <img src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg" alt="Album" />
+                  <img src={`https://picsum.photos/id/${Number(project.id) + 100}/400`} alt="Album" />
                 </figure>
                 <div className="card-body w-1/2">
                   <h3 className="card-title text-4xl">{project.name}</h3>
@@ -72,7 +72,7 @@ const FundyRound: NextPage = () => {
                     culpa qui officia deserunt mollit anim id est laborum.
                   </p>
                   <div className="card-actions justify-between">
-                    <div className="badge badge-lg bg-green-400">
+                    <div className="badge badge-lg bg-orange-300">
                       <div className="p-5">Votes: {project.votingPoints.toString()}</div>
                     </div>
                     <div className="flex">
@@ -105,11 +105,15 @@ const FundyRound: NextPage = () => {
               }}
             />
             {isApproved ? (
-              <button className="btn btn-primary" onClick={() => writeAsyncAllow()} disabled={isLoadingAllow}>
+              <button
+                className="btn btn-ghost bg-purple-500"
+                onClick={() => writeAsyncAllow()}
+                disabled={isLoadingAllow}
+              >
                 {isLoadingAllow ? <span className="loading loading-spinner loading-sm"></span> : <>Approve</>}
               </button>
             ) : (
-              <button className="btn btn-primary" onClick={() => writeAsync()} disabled={isLoading}>
+              <button className="btn btn-ghost bg-purple-500" onClick={() => writeAsync()} disabled={isLoading}>
                 {isLoading ? <span className="loading loading-spinner loading-sm"></span> : <>Fund</>}
               </button>
             )}
