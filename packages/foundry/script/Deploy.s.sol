@@ -18,11 +18,11 @@ contract DeployScript is ScaffoldETHDeploy {
             );
         }
         vm.startBroadcast(deployerPrivateKey);
-        MockUSDC mockUSDC = new MockUSDC();
-        console.log("MockUSDC deployed at:", address(mockUSDC));
 
         //FundFactory fundFactory = new FundFactory(address(mockUSDC));
         //console.log("FundFactory deployed at:", address(fundFactory));
+        MockUSDC mockUSDC = new MockUSDC();
+        console.log("MockUSDC deployed at:", address(mockUSDC));
 
         FundingRound fundingRound = new FundingRound(address(mockUSDC));
         console.log("FundingRound deployed at:", address(fundingRound));
@@ -36,7 +36,7 @@ contract DeployScript is ScaffoldETHDeploy {
          * These definitions are used to derive the types needed in the custom scaffold-eth hooks, for example.
          * This function should be called last.
          */
-        exportDeployments();
+        // exportDeployments();
     }
     function test() public {}
 }
