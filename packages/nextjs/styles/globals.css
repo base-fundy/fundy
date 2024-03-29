@@ -9,6 +9,7 @@
 
 body {
   min-height: 100vh;
+  background: #0a0a0a;
 }
 
 h1,
@@ -23,10 +24,10 @@ p {
   margin: 1rem 0;
 }
 
-.btn {
+/* .btn {
   @apply shadow-md;
 }
 
 .btn.btn-ghost {
   @apply shadow-none;
-}
+} */
