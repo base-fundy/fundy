@@ -94,12 +94,12 @@ contract FundingRound {
         for (uint256 i = 0; i < projects.length; i++) {
             if (projects[i].votingPoints > 0) {
                 uint256 projectShare = (totalBalance *
-                // --- no sablier
+                    // --- no sablier
                     projects[i].votingPoints) / totalPoints;
                 _mUSDC.transfer(projects[i].recipient, projectShare);
 
-               // --- with sablier
-                  /*_projects[i].votingPoints) / totalPoints;
+                // --- with sablier
+                /*_projects[i].votingPoints) / totalPoints;
                 createStream(
                     uint128(projectShare * 1) / 4,
                     uint128(projectShare * 3) / 4,
@@ -183,7 +183,6 @@ contract FundingRound {
             totalPoints += projects[i].votingPoints;
         }
     }
-
 
     /**
      * @dev Returns the total amount of USDC stored in the contract.
