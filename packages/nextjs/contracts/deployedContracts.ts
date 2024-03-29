@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     MockUSDC: {
-      address: "0x5eb3Bc0a489C5A8288765d2336659EbCA68FCd00",
+      address: "0x5081a39b8A5f0E35a8D959395a630b68B74Dd30f",
       abi: [
         {
           type: "constructor",
@@ -308,27 +308,23 @@ const deployedContracts = {
         approve: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         decimals: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        decreaseAllowance:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        increaseAllowance:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        decreaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        increaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         name: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         symbol: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        totalSupply:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        totalSupply: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         transfer: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        transferFrom:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
       },
     },
-    FundFactory: {
-      address: "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
+    FundingRound: {
+      address: "0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d",
       abi: [
         {
           type: "constructor",
           inputs: [
             {
-              name: "_mUSDCAddress",
+              name: "mUSDCAddress",
               type: "address",
               internalType: "address",
             },
@@ -337,97 +333,174 @@ const deployedContracts = {
         },
         {
           type: "function",
-          name: "createFundingRound",
-          inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "getFundingRounds",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address[]",
-              internalType: "address[]",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "owner",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "renounceOwnership",
-          inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "transferOwnership",
+          name: "contributeAndVote",
           inputs: [
             {
-              name: "newOwner",
+              name: "projectIds",
+              type: "uint256[]",
+              internalType: "uint256[]",
+            },
+            {
+              name: "totalAmount",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "createProject",
+          inputs: [
+            {
+              name: "name",
+              type: "string",
+              internalType: "string",
+            },
+            {
+              name: "recipient",
               type: "address",
               internalType: "address",
             },
           ],
           outputs: [],
           stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "distributeFunds",
+          inputs: [],
+          outputs: [],
+          stateMutability: "nonpayable",
+        },
+        {
+          type: "function",
+          name: "getProjects",
+          inputs: [],
+          outputs: [
+            {
+              name: "",
+              type: "tuple[]",
+              internalType: "struct FundingRound.Project[]",
+              components: [
+                {
+                  name: "id",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+                {
+                  name: "votingPoints",
+                  type: "uint256",
+                  internalType: "uint256",
+                },
+                {
+                  name: "name",
+                  type: "string",
+                  internalType: "string",
+                },
+                {
+                  name: "recipient",
+                  type: "address",
+                  internalType: "address",
+                },
+              ],
+            },
+          ],
+          stateMutability: "view",
+        },
+        {
+          type: "function",
+          name: "projects",
+          inputs: [
+            {
+              name: "",
+              type: "uint256",
+              internalType: "uint256",
+            },
+          ],
+          outputs: [
+            {
+              name: "id",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "votingPoints",
+              type: "uint256",
+              internalType: "uint256",
+            },
+            {
+              name: "name",
+              type: "string",
+              internalType: "string",
+            },
+            {
+              name: "recipient",
+              type: "address",
+              internalType: "address",
+            },
+          ],
+          stateMutability: "view",
         },
         {
           type: "event",
-          name: "FundingRoundCreated",
+          name: "FundsContributed",
           inputs: [
             {
-              name: "fundingRoundAddress",
+              name: "contributor",
               type: "address",
               indexed: true,
               internalType: "address",
+            },
+            {
+              name: "projectIds",
+              type: "uint256[]",
+              indexed: false,
+              internalType: "uint256[]",
+            },
+            {
+              name: "totalAmount",
+              type: "uint256",
+              indexed: false,
+              internalType: "uint256",
             },
           ],
           anonymous: false,
         },
         {
           type: "event",
-          name: "OwnershipTransferred",
+          name: "FundsDistributed",
+          inputs: [],
+          anonymous: false,
+        },
+        {
+          type: "event",
+          name: "ProjectCreated",
           inputs: [
             {
-              name: "previousOwner",
-              type: "address",
+              name: "projectId",
+              type: "uint256",
               indexed: true,
-              internalType: "address",
+              internalType: "uint256",
             },
             {
-              name: "newOwner",
+              name: "name",
+              type: "string",
+              indexed: false,
+              internalType: "string",
+            },
+            {
+              name: "recipient",
               type: "address",
-              indexed: true,
+              indexed: false,
               internalType: "address",
             },
           ],
           anonymous: false,
         },
       ],
-      inheritedFunctions: {
-        owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        renounceOwnership:
-          "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        transferOwnership:
-          "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-      },
+      inheritedFunctions: {},
     },
   },
   84532: {
@@ -733,17 +806,13 @@ const deployedContracts = {
         approve: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         decimals: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        decreaseAllowance:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        increaseAllowance:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        decreaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        increaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         name: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         symbol: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        totalSupply:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        totalSupply: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
         transfer: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        transferFrom:
-          "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
       },
     },
     FundFactory: {
@@ -848,10 +917,8 @@ const deployedContracts = {
       ],
       inheritedFunctions: {
         owner: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        renounceOwnership:
-          "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
-        transferOwnership:
-          "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        renounceOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
+        transferOwnership: "lib/openzeppelin-contracts/contracts/access/Ownable.sol",
       },
     },
   },

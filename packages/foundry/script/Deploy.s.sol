@@ -21,11 +21,14 @@ contract DeployScript is ScaffoldETHDeploy {
         MockUSDC mockUSDC = new MockUSDC();
         console.log("MockUSDC deployed at:", address(mockUSDC));
 
-        FundFactory fundFactory = new FundFactory(address(mockUSDC));
-        console.log("FundFactory deployed at:", address(fundFactory));
+        //FundFactory fundFactory = new FundFactory(address(mockUSDC));
+        //console.log("FundFactory deployed at:", address(fundFactory));
 
-        fundFactory.createFundingRound();
-        console.log("Funding round created through FundFactory");
+        FundingRound fundingRound = new FundingRound(address(mockUSDC));
+        console.log("FundingRound deployed at:", address(fundingRound));
+
+        //fundFactory.createFundingRound();
+        //console.log("Funding round created through FundFactory");
 
         vm.stopBroadcast();
         /**

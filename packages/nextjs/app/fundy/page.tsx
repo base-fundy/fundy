@@ -3,25 +3,46 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { parseEther } from "viem";
-// import { useAccount } from "wagmi";
-import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+import { useAccount } from "wagmi";
+import { useDeployedContractInfo, useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const FundyRound: NextPage = () => {
-  // const { address: connectedAddress } = useAccount();
+  const { address: connectedAddress } = useAccount();
   const [votedProjects, setVotedProjects] = useState<bigint[]>([]);
-  const [fundingAmount, setFundingAmount] = useState<number>(0);
+  const [fundingAmount, setFundingAmount] = useState<bigint>(BigInt(0));
 
   const { data: projects, isLoading: isProjectsLoading } = useScaffoldContractRead({
-    contractName: "YourContract",
+    contractName: "FundingRound",
     functionName: "getProjects",
     watch: true,
   });
 
+  const { data: deployedFundingRoundContract } = useDeployedContractInfo("FundingRound");
+
   const { writeAsync, isLoading } = useScaffoldContractWrite({
-    contractName: "YourContract",
-    functionName: "fundProjectsByIds",
-    args: [votedProjects.toString()],
+    contractName: "FundingRound",
+    functionName: "contributeAndVote",
+    args: [votedProjects, fundingAmount],
+    onBlockConfirmation: txnReceipt => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+
+  const { writeAsync: writeAsyncUSDC, isLoading: isLoadingUSDC } = useScaffoldContractWrite({
+    contractName: "MockUSDC",
+    functionName: "mint",
+    args: [connectedAddress, BigInt(100000)],
+    value: parseEther(fundingAmount.toString()),
+    onBlockConfirmation: txnReceipt => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
+
+  const { writeAsync: writeAsyncAllow, isLoading: isLoadingAllow } = useScaffoldContractWrite({
+    contractName: "MockUSDC",
+    functionName: "approve",
+    args: [deployedFundingRoundContract?.address, BigInt(100000)],
     value: parseEther(fundingAmount.toString()),
     onBlockConfirmation: txnReceipt => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
@@ -50,7 +71,7 @@ const FundyRound: NextPage = () => {
               </figure>
               <div className="card-body">
                 <h3 className="card-title">{project.name}</h3>
-                <span>{project.balance.toString()}</span>
+                <span>{project.votingPoints.toString()}</span>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                   dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -62,8 +83,13 @@ const FundyRound: NextPage = () => {
                   <label>Vote</label>
                   <input
                     type="checkbox"
-                    onClick={() => {
-                      setVotedProjects([...votedProjects, project.id]);
+                    checked={votedProjects.includes(project.id)}
+                    onChange={() => {
+                      setVotedProjects(
+                        votedProjects.includes(project.id)
+                          ? votedProjects.filter(id => id !== project.id)
+                          : [...votedProjects, project.id],
+                      );
                     }}
                   />
                 </div>
@@ -71,12 +97,20 @@ const FundyRound: NextPage = () => {
             </div>
           ))
         )}
+        <p>
+          <button className="btn btn-primary" onClick={() => writeAsyncUSDC()} disabled={isLoadingUSDC}>
+            {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>Get MockUSDC</>}
+          </button>
+        </p>
         <input
           type="number"
           onChange={event => {
-            setFundingAmount(Number(event.target.value));
+            setFundingAmount(BigInt(event.target.value));
           }}
         />
+        <button className="btn btn-primary" onClick={() => writeAsyncAllow()} disabled={isLoadingAllow}>
+          {isLoadingAllow ? <span className="loading loading-spinner loading-sm"></span> : <>Allow</>}
+        </button>
         <button className="btn btn-primary" onClick={() => writeAsync()} disabled={isLoading}>
           {isLoading ? <span className="loading loading-spinner loading-sm"></span> : <>Fund</>}
         </button>
