@@ -1,10 +1,10 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import "../contracts/YourContract.sol";
-/*import "../contracts/fundFactory.sol";
-import "../contracts/fundingRound.sol";
-import "../contracts/mockUSDC.sol";*/
+import "../contracts/MockUSDC.sol";
+import "../contracts/FundFactory.sol";
+import "../contracts/FundingRound.sol";
+import "forge-std/Script.sol";
 import "./DeployHelpers.s.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
@@ -18,19 +18,16 @@ contract DeployScript is ScaffoldETHDeploy {
             );
         }
         vm.startBroadcast(deployerPrivateKey);
-        YourContract yourContract =
-            new YourContract(vm.addr(deployerPrivateKey));
-        /*FundingRound fundingRound =
-            new FundingRound(vm.addr(deployerPrivateKey));
-        MockUSDC mockUSDC =
-            new MockUSDC(vm.addr(deployerPrivateKey));*/
-        console.logString(
-            string.concat(
-                "YourContract deployed at: ", vm.toString(address(yourContract))
-            )
-        );
-        vm.stopBroadcast();
+        MockUSDC mockUSDC = new MockUSDC();
+        console.log("MockUSDC deployed at:", address(mockUSDC));
 
+        FundFactory fundFactory = new FundFactory(address(mockUSDC));
+        console.log("FundFactory deployed at:", address(fundFactory));
+
+        fundFactory.createFundingRound();
+        console.log("Funding round created through FundFactory");
+
+        vm.stopBroadcast();
         /**
          * This function generates the file containing the contracts Abi definitions.
          * These definitions are used to derive the types needed in the custom scaffold-eth hooks, for example.
@@ -38,6 +35,5 @@ contract DeployScript is ScaffoldETHDeploy {
          */
         exportDeployments();
     }
-
     function test() public {}
 }

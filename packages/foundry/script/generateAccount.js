@@ -9,41 +9,41 @@ const envFilePath = "./.env";
  * @param existingEnvConfig
  */
 const setNewEnvConfig = (existingEnvConfig = {}) => {
-  console.log("👛 Generating new Wallet");
-  const randomWallet = ethers.Wallet.createRandom();
+    console.log("👛 Generating new Wallet");
+    const randomWallet = ethers.Wallet.createRandom();
 
-  const newEnvConfig = {
-    ...existingEnvConfig,
-    DEPLOYER_PRIVATE_KEY: randomWallet.privateKey,
-  };
+    const newEnvConfig = {
+        ...existingEnvConfig,
+        DEPLOYER_PRIVATE_KEY: randomWallet.privateKey,
+    };
 
-  // Store in .env
-  fs.writeFileSync(envFilePath, stringify(newEnvConfig));
-  console.log("📄 Private Key saved to packages/foundry/.env file");
-  console.log("🪄 Generated wallet address:", randomWallet.address);
+    // Store in .env
+    fs.writeFileSync(envFilePath, stringify(newEnvConfig));
+    console.log("📄 Private Key saved to packages/foundry/.env file");
+    console.log("🪄 Generated wallet address:", randomWallet.address);
 };
 
 async function main() {
-  if (!fs.existsSync(envFilePath)) {
-    console.log("entered here");
-    // No .env file yet.
-    setNewEnvConfig();
-    return;
-  }
+    if (!fs.existsSync(envFilePath)) {
+        console.log("entered here");
+        // No .env file yet.
+        setNewEnvConfig();
+        return;
+    }
 
-  // .env file exists
-  const existingEnvConfig = parse(fs.readFileSync(envFilePath).toString());
-  if (existingEnvConfig.DEPLOYER_PRIVATE_KEY) {
-    console.log(
-      "⚠️ You already have a deployer account. Check the packages/foundry/.env file"
-    );
-    return;
-  }
+    // .env file exists
+    const existingEnvConfig = parse(fs.readFileSync(envFilePath).toString());
+    if (existingEnvConfig.DEPLOYER_PRIVATE_KEY) {
+        console.log(
+            "⚠️ You already have a deployer account. Check the packages/foundry/.env file"
+        );
+        return;
+    }
 
-  setNewEnvConfig(existingEnvConfig);
+    setNewEnvConfig(existingEnvConfig);
 }
 
 main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+    console.error(error);
+    process.exitCode = 1;
 });

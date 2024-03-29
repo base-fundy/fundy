@@ -1,4 +1,3 @@
-//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
 import "forge-std/Script.sol";
@@ -45,7 +44,9 @@ contract ScaffoldETHDeploy is Script {
 
         for (uint256 i = 0; i < len; i++) {
             vm.serializeString(
-                jsonWrite, vm.toString(deployments[i].addr), deployments[i].name
+                jsonWrite,
+                vm.toString(deployments[i].addr),
+                deployments[i].name
             );
         }
 
