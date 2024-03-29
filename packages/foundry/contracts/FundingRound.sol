@@ -143,6 +143,14 @@ contract FundingRound {
     }
 
     /**
+     * @dev Returns the total amount of USDC stored in the contract.
+     * @return The total USDC balance.
+     */
+    function getTotalUSDCBalance() external view returns (uint256) {
+        return _mUSDC.balanceOf(address(this));
+    }
+
+    /**
      * @dev Internal pure function to calculate the square root of a number.
      * @param x Number to calculate the square root of
      * @return y Square root of x
