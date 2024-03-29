@@ -1,80 +1,64 @@
-# 🏗 Scaffold-ETH 2
+# Gnomish-ETHBucharest
+### Made during ETHBucharest 2024 hackathon
+Gnomish let's you easily bootstrap your public goods project via quadratic funding platform build on base 🧙‍♀️ 
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+![Frame 2 (2)](https://github.com/base-fundy/fundy/assets/101796507/76e910bb-a191-45ef-89c5-d834054e38c3)
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## Description
+Gnomish tackles the challenge of ensuring privacy-preserving public goods funding on Base, a layer 2 scaling solution for the Ethereum blockchain. Our project aims to achieve this by developing mechanisms that enable:
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+- Secure and transparent contributions to public goods initiatives.
+- Protection of donor identities, throughout the voting/project selection process.
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+By leveraging the capabilities of Base, and Secret Network, Gnomish strives to empower individuals to support public goods while safeguarding their privacy.
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+## Links
 
-## Requirements
+**Demo:** Watch our video [here](https://ethglobal.com/showcase/squadfi-vx2ky)
 
-Before you begin, you need to install the following tools:
+**Design Process:** Explore via Figma [here]()
 
-- [Node (>= v18.17)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+**License:** MIT License
 
-## Quickstart
+<img width="3136" alt="Untitled (3)" src="https://github.com/base-fundy/fundy/assets/101796507/31f53b6c-16dc-4998-a1e2-302153f25a07">
+<img width="3136" alt="Untitled (4)" src="https://github.com/base-fundy/fundy/assets/101796507/65fa1eaa-0366-4aff-8aa7-2a85916bbb63">
+<img width="3136" alt="Untitled (2)" src="https://github.com/base-fundy/fundy/assets/101796507/820a37c6-7fe8-4509-a4f9-a8e79ec4712d">
 
-To get started with Scaffold-ETH 2, follow the steps below:
+## Sponsors Tech Used
 
-1. Clone this repo & install dependencies
+### Buidl Guidl
 
-```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
-yarn install
-```
+asasas
 
-2. Run a local network in the first terminal:
+### Base
 
-```
-yarn chain
-```
+asdas
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `hardhat.config.ts`.
+### Secret Network
 
-3. On a second terminal, deploy the test contract:
+asdasd
 
-```
-yarn deploy
-```
+### Sablier
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+asdasd
 
-4. On a third terminal, start your NextJS app:
+### ENS
 
-```
-yarn start
-```
+asaada
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+## Bounties
 
-Run smart contract test with `yarn hardhat:test`
+**ETHBucharest** - Open Track
 
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
+**Buidl Guidl** - Buidl cool, helpful projects using Scaffold-ETH2.
 
-## Documentation
+**Base** - Challenge 2 (Public Goods Funding Platform)
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+**Secret Network** - Build a dApp on any EVM chain that utilizes Secret Network’s “Privacy as a Service” capabilities.
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+**Sablier** - Develop an innovative solution that builds on top of the Sablier products - or enhances their overall UX.
 
-## Contributing to Scaffold-ETH 2
+**ENS** - Build something cool, give out names, or just add identity to your app with one line of code!
 
-We welcome contributions to Scaffold-ETH 2!
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+
