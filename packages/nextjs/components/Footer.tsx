@@ -66,7 +66,6 @@ export const Footer = () => {
         <h3 className="w-full text-center">Build with the help of Gnomes, and ...</h3>
         <div className="flex justify-center items-center gap-8 align-top">
           <Image src="/secret.svg" alt="Secret Logo" width={170} height={170} />
-          <Image src="/ens.svg" alt="Secret Logo" width={170} height={170} />
           <Image src="/base.svg" alt="Secret Logo" width={170} height={170} />
           <Image src="/sablier.svg" alt="Secret Logo" width={170} height={170} />
           <Image src="/buidlguidl.svg" alt="Secret Logo" width={200} height={200} />
