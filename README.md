@@ -10,7 +10,7 @@ Gnomish is a degenerate public goods non-quadratic funding on Base and Arbitrum,
 - Meaningful allocation of often meaningless tokens.
 - Distribution via provably verifiable, private random functions.
 - Endless memes, and...
-- Chance to be rugged! (<1%)
+- Risk of rug! (<1%)
 
 By leveraging the degen culture, Gnomish strives to create a new narrative arc – Dump your Memecoins to Pump the public goods… **Expect the Unexpected!**
 
