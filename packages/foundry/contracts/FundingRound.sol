@@ -94,17 +94,12 @@ contract FundingRound {
         for (uint256 i = 0; i < projects.length; i++) {
             if (projects[i].votingPoints > 0) {
                 uint256 projectShare = (totalBalance *
-                // --- no sablier
                     projects[i].votingPoints) / totalPoints;
-                _mUSDC.transfer(projects[i].recipient, projectShare);
-
-               // --- with sablier
-                  /*_projects[i].votingPoints) / totalPoints;
                 createStream(
                     uint128(projectShare * 1) / 4,
                     uint128(projectShare * 3) / 4,
-                    _projects[i].recipient
-                );*/
+                    projects[i].recipient
+                );
             }
         }
 
@@ -119,28 +114,22 @@ contract FundingRound {
     ) public returns (uint256 streamId) {
         uint256 totalAmount = amount0 + amount1;
 
-        emit Debug(1);
         _mUSDC.approve(address(LOCKUP_DYNAMIC), totalAmount);
-        emit Debug(2);
         LockupDynamic.CreateWithMilestones memory params;
-        emit Debug(3);
         params.sender = address(this);
         params.recipient = projectAddress;
         params.totalAmount = uint128(totalAmount);
         params.asset = _mUSDC;
         params.cancelable = true;
         params.startTime = uint40(block.timestamp + 30 seconds);
-        emit Debug(4);
 
         params.segments = new LockupDynamic.Segment[](2);
-        emit Debug(5);
 
         params.segments[0] = LockupDynamic.Segment({
             amount: uint128(amount0),
             exponent: ud2x18(1e18),
             milestone: uint40(block.timestamp + 100)
         });
-        emit Debug(6);
 
         params.segments[1] = LockupDynamic.Segment({
             amount: amount1,
@@ -183,7 +172,6 @@ contract FundingRound {
             totalPoints += projects[i].votingPoints;
         }
     }
-
 
     /**
      * @dev Returns the total amount of USDC stored in the contract.

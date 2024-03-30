@@ -137,7 +137,6 @@ contract FundingRoundTest is Test {
     }
 
     function testCreateStream() public {
-        // Setup: Create two projects
         mockUSDC.mint(address(fundingRound), 100000 ether);
         string memory projectName1 = "Project One";
         address projectRecipient1 = makeAddr("projectRecipient1");
@@ -147,27 +146,18 @@ contract FundingRoundTest is Test {
         address projectRecipient2 = makeAddr("projectRecipient2");
         fundingRound.createProject(projectName2, projectRecipient2);
 
-        // Approve mUSDC spending and contribute to both projects
         uint256[] memory projectIds = new uint256[](2);
         projectIds[0] = 0; // ID of the first project
         projectIds[1] = 1; // ID of the second project
-        uint256 totalAmount = 1000 ether; // Total amount to distribute among the projects
-
-        // mockUSDC.approve(address(fundingRound), totalAmount);
 
         uint128 project1Amount = 500 ether;
-        // uint128 project2Amount = 200 ether;
+
         mockUSDC.balanceOf(address(fundingRound));
         fundingRound.createStream(
             project1Amount / 2,
             project1Amount / 2,
             projectRecipient1
         );
-        // fundingRound.createStream(
-        //     project2Amount / 2,
-        //     project2Amount / 2,
-        //     projectRecipient2
-        // );
     }
 
     function _sqrt(uint256 x) internal pure returns (uint256 y) {
