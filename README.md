@@ -59,7 +59,7 @@ asdasd
 
 asdasd
 
-![MacBook Pro 14_ - 15 (1)](https://github.com/base-fundy/fundy/assets/101796507/389fceeb-5cb8-45d7-9449-60a698f7c1c0)
+![MacBook Pro 14_ - 15 (2)](https://github.com/base-fundy/fundy/assets/101796507/b01b6559-71c6-4fe5-aeef-a4ff98174d65)
 
 ## Bounties
 
