@@ -33,7 +33,7 @@ When memes hit the fan users will be able to observe a dashboard update that wil
 - **Which #project will receive 100% of which #token**. a) Some projects might receive multiple tokens supplied. b) Some projects may not receive any.
 - **What will be the distribution strategy?** a) Some projects might receive all the funds immediately. b) Some projects may receive the funds with a random cliff, and or random vesting.
 
-<img width="3136" alt="Diagrams (11)" src="https://github.com/base-fundy/fundy/assets/101796507/a807dfb8-23ff-46f8-8215-5c53cc2e678b">
+<img width="3136" alt="Diagrams (14)" src="https://github.com/base-fundy/fundy/assets/101796507/d00f74f4-d690-406a-8167-f11ab9c0aeef">
 <img width="3136" alt="Diagrams (12)" src="https://github.com/base-fundy/fundy/assets/101796507/183b7532-305d-497d-b855-5c95731844b2">
 <img width="3136" alt="Diagrams (10)" src="https://github.com/base-fundy/fundy/assets/101796507/04bdc5fe-f5fb-48e7-afba-10600cddd5bc">
 
