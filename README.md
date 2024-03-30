@@ -5,6 +5,10 @@ Gnomish let's you easily bootstrap your public goods project via memes 🧙‍�
 ![Frame 7 (3)](https://github.com/base-fundy/fundy/assets/101796507/e5170176-1c75-474f-9959-e99e656a22fa)
 
 ## Description
+
+End 2 end transaction flow: https://sepolia.basescan.org/address/0x49D8b69e184568DB0E7495C82B6F3b3c5aaD86BF#events
+
+
 Gnomish is a degenerate public goods non-quadratic funding on Base a layer 2 scaling solution for the Ethereum blockchain. Our project is utilizing the ever-present power of memes for the benefit of the ecosystem, enabling:
 
 - Meaningful allocation of often meaningless tokens.
