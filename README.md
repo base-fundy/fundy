@@ -5,7 +5,7 @@ Gnomish let's you easily bootstrap your public goods project via memes 🧙‍�
 ![Frame 7 (3)](https://github.com/base-fundy/fundy/assets/101796507/e5170176-1c75-474f-9959-e99e656a22fa)
 
 ## Description
-Gnomish is a degenerate public goods non-quadratic funding on Base and Arbitrum, a layer 2 scaling solutions for the Ethereum blockchain. Our project is utilizing the ever-present power of memes for the benefit of the ecosystem, enabling:
+Gnomish is a degenerate public goods non-quadratic funding on Base a layer 2 scaling solution for the Ethereum blockchain. Our project is utilizing the ever-present power of memes for the benefit of the ecosystem, enabling:
 
 - Meaningful allocation of often meaningless tokens.
 - Distribution via provably verifiable, private random functions.
@@ -51,10 +51,6 @@ asasas
 
 asdas
 
-### Arbitrum
-
-asada
-
 ### Secret Network
 
 asdasd
@@ -63,11 +59,7 @@ asdasd
 
 asdasd
 
-### ENS
-
-asaada
-
-![MacBook Pro 14_ - 15 (1)](https://github.com/base-fundy/fundy/assets/101796507/3986ac5d-4311-40c0-8897-29bb7f025c81)
+![MacBook Pro 14_ - 15 (1)](https://github.com/base-fundy/fundy/assets/101796507/389fceeb-5cb8-45d7-9449-60a698f7c1c0)
 
 ## Bounties
 
@@ -77,13 +69,6 @@ asaada
 
 **Base** - Challenge 2 (Public Goods Funding Platform)
 
-**Arbitrum** - Open track(technical or non technical): Anything GOES! 1. Public good mechanisms and allocation methods
-
 **Secret Network** - Build a dApp on any EVM chain that utilizes Secret Network
 
 **Sablier** - Develop an innovative solution that builds on top of the Sablier products - or enhances their overall UX.
-
-**ENS** - Build something cool, give out names, or just add identity to your app with one line of code!
-
-
-
