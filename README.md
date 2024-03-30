@@ -45,19 +45,19 @@ When memes hit the fan users will be able to observe a dashboard update that wil
 
 ### Buidl Guidl
 
-asasas
+We utilized Scaffold-ETH2 to establish the framework, and structure of the project.
 
 ### Base
 
-asdas
+As a layer 2 solution we deployed our smart contracts on Base Network, and utilized its endless memetic potential.
 
 ### Secret Network
 
-asdasd
+We "abused" the VRF contract on Secret Network for confidential randomness computing. We pick random winners, random streams of funds distribution, as well as random chance of the RoundPool balance rug.
 
 ### Sablier
 
-asdasd
+We used 3 different streams (exponential, linear, and dynamic segmantation) for funds distribution to individual public goods projects.
 
 ![MacBook Pro 14_ - 15 (2)](https://github.com/base-fundy/fundy/assets/101796507/b01b6559-71c6-4fe5-aeef-a4ff98174d65)
 
