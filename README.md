@@ -16,9 +16,9 @@ By leveraging the degen culture, Gnomish strives to create a new narrative arc â
 
 ## Links
 
-**Demo:** Watch our video [here](https://ethglobal.com/showcase/squadfi-vx2ky)
+**Demo:** Watch our video [here]()
 
-**Concept Process:** Explore via Figma [here]()
+**Concept Process:** Explore via Figma [here](https://www.figma.com/files/project/218870402/Gnomish?fuid=1153168253312156731)
 
 **License:** MIT License
 
