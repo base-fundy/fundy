@@ -22,7 +22,7 @@ export const Footer = () => {
   const { address: connectedAddress } = useAccount();
 
   const { writeAsync: writeAsyncUSDC, isLoading: isLoadingUSDC } = useScaffoldContractWrite({
-    contractName: "MockUSDC",
+    contractName: "WhyDidHeLeave",
     functionName: "mint",
     args: [connectedAddress, BigInt(100000)],
     onBlockConfirmation: txnReceipt => {
@@ -40,7 +40,7 @@ export const Footer = () => {
               onClick={() => writeAsyncUSDC()}
               disabled={isLoadingUSDC}
             >
-              {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>Get MockUSDC $</>}
+              {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>WhyDidHeLeave $</>}
             </button>
             {nativeCurrencyPrice > 0 && (
               <div>

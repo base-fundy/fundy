@@ -1,822 +1,815 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
+const erc20ABI = [
+  {
+    type: "constructor",
+    inputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "allowance",
+    inputs: [
+      {
+        name: "owner",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "spender",
+        type: "address",
+        internalType: "address",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "approve",
+    inputs: [
+      {
+        name: "spender",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+        internalType: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "balanceOf",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        internalType: "address",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "decimals",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint8",
+        internalType: "uint8",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "decreaseAllowance",
+    inputs: [
+      {
+        name: "spender",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "subtractedValue",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+        internalType: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "increaseAllowance",
+    inputs: [
+      {
+        name: "spender",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "addedValue",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+        internalType: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "mint",
+    inputs: [
+      {
+        name: "to",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "name",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "string",
+        internalType: "string",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "symbol",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "string",
+        internalType: "string",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "totalSupply",
+    inputs: [],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "transfer",
+    inputs: [
+      {
+        name: "to",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+        internalType: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "transferFrom",
+    inputs: [
+      {
+        name: "from",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "to",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "bool",
+        internalType: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    name: "Approval",
+    inputs: [
+      {
+        name: "owner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "spender",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "value",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Transfer",
+    inputs: [
+      {
+        name: "from",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "to",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "value",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+];
+const inheritedFunctionsERC20 = {
+  allowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  approve: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  decimals: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  decreaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  increaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  name: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  symbol: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  totalSupply: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  transfer: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+  transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
+};
+
 const externalContracts = {
   84532: {
-    MockUSDC: {
-      address: "0x8AD9aD7A3c31fB0c38EC884F520eC8155fD33246",
-      abi: [
-        {
-          type: "constructor",
-          inputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "allowance",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "approve",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "balanceOf",
-          inputs: [
-            {
-              name: "account",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "decimals",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint8",
-              internalType: "uint8",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "decreaseAllowance",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "subtractedValue",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "increaseAllowance",
-          inputs: [
-            {
-              name: "spender",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "addedValue",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "mint",
-          inputs: [
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "name",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "symbol",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "string",
-              internalType: "string",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "totalSupply",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "transfer",
-          inputs: [
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "transferFrom",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              internalType: "address",
-            },
-            {
-              name: "amount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "bool",
-              internalType: "bool",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "event",
-          name: "Approval",
-          inputs: [
-            {
-              name: "owner",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "spender",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "Transfer",
-          inputs: [
-            {
-              name: "from",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "to",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "value",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-      ],
-      inheritedFunctions: {
-        allowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        approve: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        balanceOf: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        decimals: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        decreaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        increaseAllowance: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        name: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        symbol: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        totalSupply: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        transfer: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-        transferFrom: "lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol",
-      },
+    Degen: {
+      address: "0x07B8FF46Cc6e366Fe12e4d3D47825000d9948eCD",
+      abi: erc20ABI,
+      inheritedFunctions: inheritedFunctionsERC20,
+    },
+    toby: {
+      address: "0x030996ec60617Fe293B4A51c97bE0973C9ECDF33",
+      abi: erc20ABI,
+      inheritedFunctions: inheritedFunctionsERC20,
+    },
+    WhyDidHeLeave: {
+      address: "0x9080cFe04A99afeBF37EaA40441c4191B46c2cd1",
+      abi: erc20ABI,
+      inheritedFunctions: inheritedFunctionsERC20,
+    },
+    mfercoin: {
+      address: "0xf45b4dE5C02A7FD2cb137145fb52e7D6d5a9a32e",
+      abi: erc20ABI,
+      inheritedFunctions: inheritedFunctionsERC20,
+    },
+    Brett: {
+      address: "0xB77Ff06d00179F0811E9788B2cBA6A2b0011B165",
+      abi: erc20ABI,
+      inheritedFunctions: inheritedFunctionsERC20,
     },
     FundingRound: {
-      address: "0x2E2Ed0Cfd3AD2f1d34481277b3204d807Ca2F8c2",
+      address: "0x12357F6A9040Aa35d918bc2075fD724CA9Eac367",
       abi: [
         {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
           type: "constructor",
-          inputs: [
-            {
-              name: "mUSDCAddress",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          stateMutability: "nonpayable",
         },
         {
-          type: "function",
-          name: "LOCKUP_DYNAMIC",
           inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "address",
-              internalType: "contract ISablierV2LockupDynamic",
-            },
-          ],
-          stateMutability: "view",
+          name: "ShitCoinAlreadyExists",
+          type: "error",
         },
         {
-          type: "function",
-          name: "contributeAndVote",
-          inputs: [
-            {
-              name: "projectIds",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-            {
-              name: "totalAmount",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "createProject",
-          inputs: [
-            {
-              name: "name",
-              type: "string",
-              internalType: "string",
-            },
-            {
-              name: "recipient",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "createStream",
-          inputs: [
-            {
-              name: "amount0",
-              type: "uint128",
-              internalType: "uint128",
-            },
-            {
-              name: "amount1",
-              type: "uint128",
-              internalType: "uint128",
-            },
-            {
-              name: "projectAddress",
-              type: "address",
-              internalType: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "streamId",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "nonpayable",
-        },
-        {
-          type: "function",
-          name: "distributeFunds",
           inputs: [],
-          outputs: [],
-          stateMutability: "nonpayable",
+          name: "ShitCoinNotApproved",
+          type: "error",
         },
         {
-          type: "function",
-          name: "getProjects",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "tuple[]",
-              internalType: "struct FundingRound.Project[]",
-              components: [
-                {
-                  name: "id",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-                {
-                  name: "votingPoints",
-                  type: "uint256",
-                  internalType: "uint256",
-                },
-                {
-                  name: "name",
-                  type: "string",
-                  internalType: "string",
-                },
-                {
-                  name: "recipient",
-                  type: "address",
-                  internalType: "address",
-                },
-              ],
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getTotalUSDCBalance",
-          inputs: [],
-          outputs: [
-            {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "projects",
+          anonymous: false,
           inputs: [
             {
-              name: "",
-              type: "uint256",
-              internalType: "uint256",
-            },
-          ],
-          outputs: [
-            {
-              name: "id",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "votingPoints",
-              type: "uint256",
-              internalType: "uint256",
-            },
-            {
-              name: "name",
-              type: "string",
-              internalType: "string",
-            },
-            {
-              name: "recipient",
-              type: "address",
+              indexed: true,
               internalType: "address",
+              name: "shitCoin",
+              type: "address",
             },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "event",
-          name: "Debug",
-          inputs: [
             {
-              name: "number",
-              type: "uint256",
               indexed: false,
               internalType: "uint256",
+              name: "amount",
+              type: "uint256",
             },
           ],
-          anonymous: false,
+          name: "Funded",
+          type: "event",
         },
         {
-          type: "event",
-          name: "FundsContributed",
+          anonymous: false,
           inputs: [
             {
+              indexed: true,
+              internalType: "address",
               name: "contributor",
               type: "address",
-              indexed: true,
-              internalType: "address",
             },
             {
-              name: "projectIds",
-              type: "uint256[]",
               indexed: false,
               internalType: "uint256[]",
+              name: "projectIds",
+              type: "uint256[]",
             },
             {
+              indexed: false,
+              internalType: "uint256",
               name: "totalAmount",
               type: "uint256",
-              indexed: false,
-              internalType: "uint256",
             },
           ],
-          anonymous: false,
+          name: "FundsContributed",
+          type: "event",
         },
         {
-          type: "event",
-          name: "FundsDistributed",
+          anonymous: false,
           inputs: [],
-          anonymous: false,
+          name: "FundsDistributed",
+          type: "event",
         },
         {
-          type: "event",
-          name: "ProjectCreated",
+          anonymous: false,
           inputs: [
             {
-              name: "projectId",
-              type: "uint256",
+              indexed: true,
+              internalType: "address",
+              name: "previousOwner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "OwnershipTransferred",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
               indexed: true,
               internalType: "uint256",
+              name: "projectId",
+              type: "uint256",
             },
             {
-              name: "name",
-              type: "string",
               indexed: false,
               internalType: "string",
+              name: "name",
+              type: "string",
             },
             {
-              name: "recipient",
-              type: "address",
               indexed: false,
               internalType: "address",
+              name: "recipient",
+              type: "address",
             },
           ],
-          anonymous: false,
+          name: "ProjectCreated",
+          type: "event",
         },
-      ],
-      inheritedFunctions: {},
-    },
-  },
-  84532: {
-    FundingRound: {
-      address: "0x9c98B787073d276922e2143FF9C0174e11Ca61e4",
-      abi: [
         {
-          type: "constructor",
+          anonymous: false,
           inputs: [
             {
-              name: "mUSDCAddress",
-              type: "address",
+              indexed: false,
               internalType: "address",
+              name: "newShitCoin",
+              type: "address",
             },
           ],
-          stateMutability: "nonpayable",
+          name: "ShitCoinAdded",
+          type: "event",
         },
         {
-          type: "function",
-          name: "LOCKUP_DYNAMIC",
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "requestId",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256[]",
+              name: "randomWords",
+              type: "uint256[]",
+            },
+          ],
+          name: "fulfilledRandomWords",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "requestId",
+              type: "uint256",
+            },
+          ],
+          name: "requestedRandomness",
+          type: "event",
+        },
+        {
           inputs: [],
+          name: "LOCKUP_DYNAMIC",
           outputs: [
             {
+              internalType: "contract ISablierV2LockupDynamic",
               name: "",
               type: "address",
-              internalType: "contract ISablierV2LockupDynamic",
             },
           ],
           stateMutability: "view",
+          type: "function",
         },
         {
-          type: "function",
-          name: "contributeAndVote",
-          inputs: [
+          inputs: [],
+          name: "VRFGateway",
+          outputs: [
             {
-              name: "projectIds",
-              type: "uint256[]",
-              internalType: "uint256[]",
-            },
-            {
-              name: "totalAmount",
-              type: "uint256",
-              internalType: "uint256",
+              internalType: "address",
+              name: "",
+              type: "address",
             },
           ],
-          outputs: [],
-          stateMutability: "nonpayable",
+          stateMutability: "view",
+          type: "function",
         },
         {
-          type: "function",
-          name: "createProject",
           inputs: [
             {
+              internalType: "string",
               name: "name",
               type: "string",
-              internalType: "string",
             },
             {
+              internalType: "address",
               name: "recipient",
               type: "address",
-              internalType: "address",
             },
           ],
+          name: "createProject",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
         },
         {
-          type: "function",
-          name: "createStream",
           inputs: [
             {
-              name: "amount0",
-              type: "uint128",
-              internalType: "uint128",
-            },
-            {
-              name: "amount1",
-              type: "uint128",
-              internalType: "uint128",
-            },
-            {
+              internalType: "address",
               name: "projectAddress",
               type: "address",
+            },
+            {
               internalType: "address",
+              name: "shitCoin",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "randomWord",
+              type: "uint256",
             },
           ],
+          name: "createStream",
           outputs: [
             {
+              internalType: "uint256",
               name: "streamId",
               type: "uint256",
-              internalType: "uint256",
             },
           ],
           stateMutability: "nonpayable",
+          type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "uint32",
+              name: "_callbackGasLimit",
+              type: "uint32",
+            },
+          ],
+          name: "endFoundingRound",
+          outputs: [],
+          stateMutability: "payable",
           type: "function",
-          name: "distributeFunds",
-          inputs: [],
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "requestId",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256[]",
+              name: "randomWords",
+              type: "uint256[]",
+            },
+          ],
+          name: "fulfillRandomWords",
           outputs: [],
           stateMutability: "nonpayable",
+          type: "function",
         },
         {
+          inputs: [
+            {
+              internalType: "address",
+              name: "shitCoin",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "fund",
+          outputs: [],
+          stateMutability: "nonpayable",
           type: "function",
-          name: "getProjects",
+        },
+        {
           inputs: [],
+          name: "getProjects",
           outputs: [
             {
-              name: "",
-              type: "tuple[]",
-              internalType: "struct FundingRound.Project[]",
               components: [
                 {
+                  internalType: "uint256",
                   name: "id",
                   type: "uint256",
-                  internalType: "uint256",
                 },
                 {
+                  internalType: "uint256",
                   name: "votingPoints",
                   type: "uint256",
-                  internalType: "uint256",
                 },
                 {
+                  internalType: "string",
                   name: "name",
                   type: "string",
-                  internalType: "string",
                 },
                 {
+                  internalType: "address",
                   name: "recipient",
                   type: "address",
-                  internalType: "address",
+                },
+                {
+                  internalType: "address[]",
+                  name: "shitcoins",
+                  type: "address[]",
                 },
               ],
-            },
-          ],
-          stateMutability: "view",
-        },
-        {
-          type: "function",
-          name: "getTotalUSDCBalance",
-          inputs: [],
-          outputs: [
-            {
+              internalType: "struct FundingRound.Project[]",
               name: "",
-              type: "uint256",
-              internalType: "uint256",
+              type: "tuple[]",
             },
           ],
           stateMutability: "view",
+          type: "function",
         },
         {
-          type: "function",
-          name: "projects",
           inputs: [
             {
-              name: "",
-              type: "uint256",
               internalType: "uint256",
+              name: "index",
+              type: "uint256",
             },
           ],
+          name: "getProjectsShitcoin",
           outputs: [
             {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "projects",
+          outputs: [
+            {
+              internalType: "uint256",
               name: "id",
               type: "uint256",
-              internalType: "uint256",
             },
             {
+              internalType: "uint256",
               name: "votingPoints",
               type: "uint256",
-              internalType: "uint256",
             },
             {
+              internalType: "string",
               name: "name",
               type: "string",
-              internalType: "string",
             },
             {
+              internalType: "address",
               name: "recipient",
               type: "address",
-              internalType: "address",
             },
           ],
           stateMutability: "view",
+          type: "function",
         },
         {
-          type: "event",
-          name: "Debug",
-          inputs: [
-            {
-              name: "number",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "FundsContributed",
-          inputs: [
-            {
-              name: "contributor",
-              type: "address",
-              indexed: true,
-              internalType: "address",
-            },
-            {
-              name: "projectIds",
-              type: "uint256[]",
-              indexed: false,
-              internalType: "uint256[]",
-            },
-            {
-              name: "totalAmount",
-              type: "uint256",
-              indexed: false,
-              internalType: "uint256",
-            },
-          ],
-          anonymous: false,
-        },
-        {
-          type: "event",
-          name: "FundsDistributed",
           inputs: [],
-          anonymous: false,
+          name: "renounceOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
         },
         {
-          type: "event",
-          name: "ProjectCreated",
           inputs: [
             {
-              name: "projectId",
-              type: "uint256",
-              indexed: true,
-              internalType: "uint256",
-            },
-            {
-              name: "name",
-              type: "string",
-              indexed: false,
-              internalType: "string",
-            },
-            {
-              name: "recipient",
-              type: "address",
-              indexed: false,
               internalType: "address",
+              name: "_VRFGateway",
+              type: "address",
             },
           ],
-          anonymous: false,
+          name: "setGatewayAddress",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newShitCoin",
+              type: "address",
+            },
+          ],
+          name: "setShitCoin",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          name: "shitCoinList",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "shitCoin",
+              type: "address",
+            },
+          ],
+          name: "shitCoins",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "approved",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "newOwner",
+              type: "address",
+            },
+          ],
+          name: "transferOwnership",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
         },
       ],
       inheritedFunctions: {},
