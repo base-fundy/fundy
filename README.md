@@ -1,28 +1,45 @@
 # Gnomish-ETHBucharest
 ### Made during ETHBucharest 2024 hackathon
-Gnomish let's you easily bootstrap your public goods project via quadratic funding platform build on base 🧙‍♀️ 
+Gnomish let's you easily bootstrap your public goods project via memes 🧙‍♀️ 
 
-![Frame 7 (3)](https://github.com/base-fundy/fundy/assets/101796507/7cb7813e-2ff6-4686-b392-c604bfd0c0c5)
+![Frame 7 (3)](https://github.com/base-fundy/fundy/assets/101796507/e5170176-1c75-474f-9959-e99e656a22fa)
 
 ## Description
-Gnomish tackles the challenge of ensuring privacy-preserving public goods funding on Base, a layer 2 scaling solution for the Ethereum blockchain. Our project aims to achieve this by developing mechanisms that enable:
+Gnomish is a degenerate public goods non-quadratic funding on Base and Arbitrum, a layer 2 scaling solutions for the Ethereum blockchain. Our project is utilizing the ever-present power of memes for the benefit of the ecosystem, enabling:
 
-- Secure and transparent contributions to public goods initiatives.
-- Protection of donor identities, throughout the voting/project selection process.
+- Meaningful allocation of often meaningless tokens.
+- Distribution via provably verifiable, private random functions.
+- Endless memes, and...
+- Chance to be rugged! (<1%)
 
-By leveraging the capabilities of Base, and Secret Network, Gnomish strives to empower individuals to support public goods while safeguarding their privacy.
+By leveraging the degen culture, Gnomish strives to create a new narrative arc – Dump your Memecoins to Pump the public goods… **Expect the Unexpected!**
 
 ## Links
 
 **Demo:** Watch our video [here](https://ethglobal.com/showcase/squadfi-vx2ky)
 
-**Design Process:** Explore via Figma [here]()
+**Concept Process:** Explore via Figma [here]()
 
 **License:** MIT License
 
-<img width="3136" alt="Untitled (3)" src="https://github.com/base-fundy/fundy/assets/101796507/31f53b6c-16dc-4998-a1e2-302153f25a07">
-<img width="3136" alt="Untitled (4)" src="https://github.com/base-fundy/fundy/assets/101796507/65fa1eaa-0366-4aff-8aa7-2a85916bbb63">
-<img width="3136" alt="Untitled (2)" src="https://github.com/base-fundy/fundy/assets/101796507/820a37c6-7fe8-4509-a4f9-a8e79ec4712d">
+## How does it work?
+
+When a user visits the platform, they are presented with a set of projects that has been selected to participate in the current funding round. Immediately after, the user is offered to select a memecoin of their choice and proceed to transfer the funds to the specific *RoundPool*.
+
+Every round is finalized after a *2-week open funding cycle*, leading to an **Event of Randomness** – the crown jewel of the platform.
+
+When memes hit the fan users will be able to observe a dashboard update that will uncover the following:
+
+- **Which #project will receive 100% of which #token**. a) Some projects might receive multiple tokens supplied. b) Some projects may not receive any.
+- **What will be the distribution strategy?** a) Some projects might receive all the funds immediately. b) Some projects may receive the funds with a random cliff, and or random vesting.
+
+<img width="3136" alt="Diagrams (11)" src="https://github.com/base-fundy/fundy/assets/101796507/a807dfb8-23ff-46f8-8215-5c53cc2e678b">
+<img width="3136" alt="Diagrams (12)" src="https://github.com/base-fundy/fundy/assets/101796507/183b7532-305d-497d-b855-5c95731844b2">
+<img width="3136" alt="Diagrams (10)" src="https://github.com/base-fundy/fundy/assets/101796507/04bdc5fe-f5fb-48e7-afba-10600cddd5bc">
+
+## Why?... You ask!?
+
+... Why not, we answer!? Once a degen, always a degen. Thanks to Gnomish we can now feel the thrill of randomness and potential rug pull all while funding public goods on Ethereum!
 
 ## Sponsors Tech Used
 
@@ -33,6 +50,10 @@ asasas
 ### Base
 
 asdas
+
+### Arbitrum
+
+asada
 
 ### Secret Network
 
@@ -46,6 +67,8 @@ asdasd
 
 asaada
 
+![MacBook Pro 14_ - 15 (1)](https://github.com/base-fundy/fundy/assets/101796507/3986ac5d-4311-40c0-8897-29bb7f025c81)
+
 ## Bounties
 
 **ETHBucharest** - Open Track
@@ -54,7 +77,9 @@ asaada
 
 **Base** - Challenge 2 (Public Goods Funding Platform)
 
-**Secret Network** - Build a dApp on any EVM chain that utilizes Secret Network’s “Privacy as a Service” capabilities.
+**Arbitrum** - Open track(technical or non technical): Anything GOES! 1. Public good mechanisms and allocation methods
+
+**Secret Network** - Build a dApp on any EVM chain that utilizes Secret Network
 
 **Sablier** - Develop an innovative solution that builds on top of the Sablier products - or enhances their overall UX.
 
