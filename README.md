@@ -2,7 +2,7 @@
 ### Made during ETHBucharest 2024 hackathon
 Gnomish let's you easily bootstrap your public goods project via quadratic funding platform build on base 🧙‍♀️ 
 
-![Frame 7 (2)](https://github.com/base-fundy/fundy/assets/101796507/44f5b7d1-af3c-46cb-9bcc-d12ffd69a970)
+![Frame 7 (3)](https://github.com/base-fundy/fundy/assets/101796507/7cb7813e-2ff6-4686-b392-c604bfd0c0c5)
 
 ## Description
 Gnomish tackles the challenge of ensuring privacy-preserving public goods funding on Base, a layer 2 scaling solution for the Ethereum blockchain. Our project aims to achieve this by developing mechanisms that enable:
