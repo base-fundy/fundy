@@ -57,7 +57,7 @@ We "abused" the VRF contract on Secret Network for confidential randomness compu
 
 ### Sablier
 
-We used 3 different streams (exponential, linear, and dynamic segmantation) for funds distribution to individual public goods projects.
+We used 3 different streams (exponential, linear, and dynamic segmentation) for funds distribution to individual public goods projects.
 
 ![MacBook Pro 14_ - 15 (2)](https://github.com/base-fundy/fundy/assets/101796507/b01b6559-71c6-4fe5-aeef-a4ff98174d65)
 
