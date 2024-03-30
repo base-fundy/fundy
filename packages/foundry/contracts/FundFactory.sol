@@ -6,17 +6,11 @@ import "./FundingRound.sol";
 
 contract FundFactory is Ownable {
     address[] private _fundingRounds;
-    // Assuming the mUSDC address is constant and known at compile time
-    address private immutable _i_mUSDCAddress;
-
-    constructor(address _mUSDCAddress) {
-        _i_mUSDCAddress = _mUSDCAddress;
-    }
 
     event FundingRoundCreated(address indexed fundingRoundAddress);
 
     function createFundingRound() external onlyOwner {
-        FundingRound newRound = new FundingRound(_i_mUSDCAddress);
+        FundingRound newRound = new FundingRound(msg.sender);
         _fundingRounds.push(address(newRound));
         emit FundingRoundCreated(address(newRound));
     }
