@@ -11,6 +11,7 @@ import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { decodeTransactionData, getFunctionDetails } from "~~/utils/scaffold-eth";
 import { replacer } from "~~/utils/scaffold-eth/common";
 
+export const runtime = "edge";
 type PageProps = {
   params: { txHash?: Hash };
 };
