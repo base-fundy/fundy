@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { hardhat } from "viem/chains";
 import { useAccount } from "wagmi";
 import { CurrencyDollarIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
@@ -20,6 +21,7 @@ export const Footer = () => {
   const { targetNetwork } = useTargetNetwork();
   const isLocalNetwork = targetNetwork.id === hardhat.id;
   const { address: connectedAddress } = useAccount();
+  const pathname = usePathname();
 
   const { writeAsync: writeAsyncUSDC, isLoading: isLoadingUSDC } = useScaffoldContractWrite({
     contractName: "WhyDidHeLeave",
@@ -32,36 +34,38 @@ export const Footer = () => {
 
   return (
     <div className="min-h-0 h-[20rem] py-5 px-1 mb-11 lg:mb-0 bg-white">
-      <div>
-        <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
-          <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
-            <button
-              className="btn btn-info btn-sm font-normal"
-              onClick={() => writeAsyncUSDC()}
-              disabled={isLoadingUSDC}
-            >
-              {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>WhyDidHeLeave $</>}
-            </button>
-            {nativeCurrencyPrice > 0 && (
-              <div>
-                <div className="btn btn-info btn-sm font-normal gap-1 cursor-auto">
-                  <CurrencyDollarIcon className="h-4 w-4" />
-                  <span>{nativeCurrencyPrice}</span>
+      {pathname !== "/" && (
+        <div>
+          <div className="fixed flex justify-between items-center w-full z-10 p-4 bottom-0 left-0 pointer-events-none">
+            <div className="flex flex-col md:flex-row gap-2 pointer-events-auto">
+              <button
+                className="btn btn-info btn-sm font-normal"
+                onClick={() => writeAsyncUSDC()}
+                disabled={isLoadingUSDC}
+              >
+                {isLoadingUSDC ? <span className="loading loading-spinner loading-sm"></span> : <>WhyDidHeLeave $</>}
+              </button>
+              {nativeCurrencyPrice > 0 && (
+                <div>
+                  <div className="btn btn-info btn-sm font-normal gap-1 cursor-auto">
+                    <CurrencyDollarIcon className="h-4 w-4" />
+                    <span>{nativeCurrencyPrice}</span>
+                  </div>
                 </div>
-              </div>
-            )}
-            {isLocalNetwork && (
-              <>
-                <Faucet />
-                <Link href="/blockexplorer" passHref className="btn btn-info btn-sm font-normal gap-1">
-                  <MagnifyingGlassIcon className="h-4 w-4" />
-                  <span>Block Explorer</span>
-                </Link>
-              </>
-            )}
+              )}
+              {isLocalNetwork && (
+                <>
+                  <Faucet />
+                  <Link href="/blockexplorer" passHref className="btn btn-info btn-sm font-normal gap-1">
+                    <MagnifyingGlassIcon className="h-4 w-4" />
+                    <span>Block Explorer</span>
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="flex flex-col justify-end items-center gap-8 h-full">
         <h3 className="w-full text-center">Build with the help of Gnomes, and ...</h3>
         <div className="flex justify-center items-center gap-8 align-top">
