@@ -20,7 +20,7 @@ By leveraging the degen culture, Gnomish strives to create a new narrative arc â
 
 ## Links
 
-**Demo:** Watch our video [here]()
+**Demo:** Watch our video [here](https://www.loom.com/share/e9f8f90a454942488aa819bc82123d40?sid=14c5ba01-52cd-41e8-947d-f88fe1387a60)
 
 **Concept Process:** Explore via Figma [here](https://www.figma.com/files/project/218870402/Gnomish?fuid=1153168253312156731)
 
